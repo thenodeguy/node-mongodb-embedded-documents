@@ -46,10 +46,6 @@ var EmployeeSchema = new Schema({
   }
 });
 
-
-// HERE Attach methods to the EmployeeSchema
-// https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
-
 // Generate a Model from the Schema.
 var Employee = mongoose.model('Employee', EmployeeSchema);
 

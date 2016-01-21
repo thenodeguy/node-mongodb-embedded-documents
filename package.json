@@ -1,22 +1,24 @@
 {
-  "name": "node-mongoose-nested-collection",
+  "name": "node-mongodb-embedded-documents",
+  "description": "A basic and lean recipe for creating a nested collection in MongoDB using Mongoose.",
   "version": "1.0.0",
-  "description": "",
+  "author": "benjaminvickers",
+  "license": "ISC",
+  "homepage": "https://github.com/benjaminvickers/node-mongodb-embedded-documents#readme",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/benjaminvickers/node-mongoose-nested-collection.git"
-  },
-  "author": "benjaminvickers",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/benjaminvickers/node-mongoose-nested-collection/issues"
-  },
-  "homepage": "https://github.com/benjaminvickers/node-mongoose-nested-collection#readme",
   "dependencies": {
     "mongoose": "^4.3.6"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjaminvickers/node-mongodb-embedded-documents.git"
+  },
+  "bugs": {
+    "url": "https://github.com/benjaminvickers/node-mongodb-embedded-documents/issues"
+  },
+  "homepage": "https://github.com/benjaminvickers/node-mongodb-embedded-documentsn#readme"
 }

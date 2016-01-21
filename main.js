@@ -83,16 +83,43 @@ var promise = new Promise(function(resolve, reject) {
         }
         
         console.log('Document updated successfully.');
-        resolve(employee);
+        resolve(employee.flexitimeaccrued[0]._id);
       });
     });
   });
 })
-.then(function(employee) {
+.then(function(flexitimeId) {
 
-  // HERE: Find by other means, find by embedded collections etc
-  console.log('Finalising..');
-  process.exit(0);
+  // Search for an embedded document using it's id.
+  return new Promise(function(resolve, reject) {
+    Employee.findOne({ 'flexitimeaccrued._id': flexitimeId }, function(err, employee) {
+      if(err) {
+        reject(err);
+        return;
+      }
+      
+      // The encapsulating Employe has been found.
+      resolve(employee);
+    });
+  });
+})
+.then(function(employee) {
+  
+  // Delete an embedded document.
+  return new Promise(function(resolve, reject) {
+
+    employee.flexitimeaccrued[0].remove();
+    employee.save(function(err) {
+      if(err) {
+        reject(err);
+        return;
+      }
+      
+      // Finished.
+      console.log('Press Ctrl-C to end...');
+      resolve();
+    });
+  });
 })
 .catch(function(err) {
 
