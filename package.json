@@ -1,0 +1,22 @@
+{
+  "name": "node-mongoose-nested-collection",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjaminvickers/node-mongoose-nested-collection.git"
+  },
+  "author": "benjaminvickers",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benjaminvickers/node-mongoose-nested-collection/issues"
+  },
+  "homepage": "https://github.com/benjaminvickers/node-mongoose-nested-collection#readme",
+  "dependencies": {
+    "mongoose": "^4.3.6"
+  }
+}
