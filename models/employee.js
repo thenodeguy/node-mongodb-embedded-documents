@@ -1,7 +1,7 @@
 'use strict';
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 
 // The FlexitimeSchema will be embedded within the EmployeeSchema.
@@ -10,7 +10,7 @@ var FlexitimeSchema = new Schema({
   // _id will be created by default
   date: Date,
   duration: Number,
-  note: String
+  note: String,
 });
 
 var EmployeeSchema = new Schema({
@@ -20,30 +20,30 @@ var EmployeeSchema = new Schema({
     type: String,
     trim: true,
     required: true,
-    unique: true
+    unique: true,
   },
   firstname: {
     type: String,
     trim: true,
-    required: true
+    required: true,
   },
   lastname: {
     type: String,
     trim: true,
-    required: true
+    required: true,
   },
   flexitimeaccrued: [FlexitimeSchema],
   flexitimeused: [FlexitimeSchema],
   balance: {
     type: Number,
     required: true,
-    default: 0
+    default: 0,
   },
   isactive: {
     type: Boolean,
     required: true,
-    default: true
-  }
+    default: true,
+  },
 });
 
 // Generate a Model from the Schema.

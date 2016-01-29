@@ -1,25 +1,23 @@
 'use strict';
 
-var mongoose = require('mongoose');
-var dbConfig = require('./configs/db');
-var Employee = require('./models/employee');
-
+const mongoose = require('mongoose');
+const dbConfig = require('./configs/db');
+const Employee = require('./models/employee');
 
 mongoose.connect(dbConfig.url);
 
 // Close the database connection when Node process ends.
-process.on('SIGINT', function() {
-  mongoose.connection.close(function () {
+process.on('SIGINT', () => {
+  mongoose.connection.close(() => {
     process.exit(0);
   });
 });
 
-
 var promise = new Promise(function(resolve, reject) {
   
   // Clear the local.Employee collection.
-  Employee.remove({}, function(err) {
-    if(err) {
+  Employee.remove({}, (err) => {
+    if (err) {
       reject(err);
       return;
     }
@@ -27,17 +25,25 @@ var promise = new Promise(function(resolve, reject) {
     resolve();
   });
 })
-.then(function() {
+.then(() => {
 
   // Persist new Employee document.  
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
 
     var date1 = new Date();
     var date2 = new Date();
     date2.setDate(date1.getDate() + 1);
 
-    var flexitime1 = {"date":date1, "duration":"60", "note":"Started work one hour early on 1/1/2016"};
-    var flexitime2 = {"date":date2, "duration":"30", "note":"Started work half an hour early on 2/1/2016"};
+    var flexitime1 = {
+      date: date1, 
+      duration: 60, 
+      note: 'Started work one hour early on 1/1/2016',
+    };
+    var flexitime2 = {
+      date: date2, 
+      duration: 30, 
+      note: 'Started work half an hour early on 2/1/2016',
+    };
 
     var employee = new Employee();
     employee.email = 'root@localhost';
@@ -47,8 +53,8 @@ var promise = new Promise(function(resolve, reject) {
     employee.flexitimeaccrued.push(flexitime2);
     employee.isactive = true;
     
-    employee.save(function(err) {
-      if(err) {
+    employee.save((err) => {
+      if (err) {
         reject(err);
         return;
       }
@@ -58,13 +64,13 @@ var promise = new Promise(function(resolve, reject) {
     });
   });
 })
-.then(function(employeeId) {
+.then((employeeId) => {
 
   // Update the new Employee document.
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
   
-    Employee.findById(employeeId, function(err, employee) {
-      if(err) {
+    Employee.findById(employeeId, (err, employee) => {
+      if (err) {
         reject(err);
         return;
       }
@@ -73,11 +79,15 @@ var promise = new Promise(function(resolve, reject) {
       var date = new Date();
       date.setDate(date.getDate() + 2);
       
-      var flexitime3 = {"date":date, "duration":"120", "note":"Early start on 3/1/2016"};
+      var flexitime3 = {
+        date: date, 
+        duration: 120,
+        note: 'Early start on 3/1/2016',
+      };
       
       employee.flexitimeaccrued.push(flexitime3);
       employee.save(function(err) {
-        if(err) {
+        if (err) {
           reject(err);
           return;
         }
@@ -88,29 +98,31 @@ var promise = new Promise(function(resolve, reject) {
     });
   });
 })
-.then(function(flexitimeId) {
+.then((flexitimeId) => {
 
   // Search for an embedded document using it's id.
-  return new Promise(function(resolve, reject) {
-    Employee.findOne({ 'flexitimeaccrued._id': flexitimeId }, function(err, employee) {
-      if(err) {
-        reject(err);
-        return;
-      }
-      
-      // The encapsulating Employe has been found.
-      resolve(employee);
-    });
+  return new Promise((resolve, reject) => {
+    Employee.findOne(
+      { 'flexitimeaccrued._id': flexitimeId },
+      (err, employee) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        
+        // The encapsulating Employe has been found.
+        resolve(employee);
+      });
   });
 })
-.then(function(employee) {
+.then((employee) => {
   
   // Delete an embedded document.
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
 
     employee.flexitimeaccrued[0].remove();
-    employee.save(function(err) {
-      if(err) {
+    employee.save((err) => {
+      if (err) {
         reject(err);
         return;
       }
@@ -121,12 +133,7 @@ var promise = new Promise(function(resolve, reject) {
     });
   });
 })
-.catch(function(err) {
-
+.catch((err) => {
   console.log('An error occured: ' + err);
 });
-
-
-
-
 
