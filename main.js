@@ -13,7 +13,7 @@ process.on('SIGINT', () => {
   });
 });
 
-var promise = new Promise(function(resolve, reject) {
+var promise = new Promise((resolve, reject) => {
   
   // Clear the local.Employee collection.
   Employee.remove({}, (err) => {
