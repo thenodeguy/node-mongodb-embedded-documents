@@ -1,4 +1,7 @@
 # node-mongodb-embedded-documents
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/bjvickers/node-mongodb-embedded-documents.svg)](https://greenkeeper.io/)
+
 A basic and lean recipe for creating a nested collection in MongoDB using 
 Mongoose.
 
